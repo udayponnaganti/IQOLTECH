@@ -105,18 +105,23 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         if (error) {
           setAuthError(`Google sign-in failed: ${error.message}`);
         }
+        // Note: For OAuth, the user will be redirected and handled by the auth state listener
       } else if (provider === 'facebook') {
         const { error } = await authHelpers.signInWithFacebook();
         if (error) {
           setAuthError(`Facebook sign-in failed: ${error.message}`);
         }
+        // Note: For OAuth, the user will be redirected and handled by the auth state listener
       }
     } catch (error: any) {
       setAuthError(`${provider} sign-in failed. Please try again.`);
       console.error(`${provider} auth error:`, error);
+    } finally {
+      // Don't set loading to false immediately for OAuth as user will be redirected
+      if (!window.location.hash.includes('access_token')) {
+        setIsLoading(false);
+      }
     }
-
-    setIsLoading(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

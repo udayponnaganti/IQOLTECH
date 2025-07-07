@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { MapPin, Eye, EyeOff, Mail, Lock, ArrowRight, Users, Home, TrendingUp } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, Eye, EyeOff, Mail, Lock, ArrowRight, Users, Home, TrendingUp, AlertCircle, CheckCircle } from 'lucide-react';
+import { authHelpers } from '../lib/supabase';
+import { validateForm, ValidationError } from '../utils/validation';
 
 interface LoginPageProps {
   onLogin: () => void;
@@ -15,23 +17,126 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     name: ''
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<ValidationError[]>([]);
+  const [authError, setAuthError] = useState<string>('');
+  const [successMessage, setSuccessMessage] = useState<string>('');
+
+  // Clear errors when switching between login/signup
+  useEffect(() => {
+    setErrors([]);
+    setAuthError('');
+    setSuccessMessage('');
+  }, [isLogin]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    setAuthError('');
+    setSuccessMessage('');
+
+    // Validate form
+    const validationErrors = validateForm(formData, !isLogin);
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      setIsLoading(false);
+      return;
+    }
+
+    setErrors([]);
+
+    try {
+      if (isLogin) {
+        // Sign in
+        const { data, error } = await authHelpers.signIn(formData.email, formData.password);
+        
+        if (error) {
+          if (error.message.includes('Invalid login credentials')) {
+            setAuthError('Invalid email or password. Please check your credentials and try again.');
+          } else if (error.message.includes('Email not confirmed')) {
+            setAuthError('Please check your email and click the confirmation link before signing in.');
+          } else {
+            setAuthError(error.message);
+          }
+        } else if (data.user) {
+          setSuccessMessage('Successfully signed in! Redirecting...');
+          setTimeout(() => {
+            onLogin();
+          }, 1500);
+        }
+      } else {
+        // Sign up
+        const { data, error } = await authHelpers.signUp(formData.email, formData.password, formData.name);
+        
+        if (error) {
+          if (error.message.includes('User already registered')) {
+            setAuthError('An account with this email already exists. Please sign in instead.');
+          } else if (error.message.includes('Password should be at least 6 characters')) {
+            setAuthError('Password must be at least 6 characters long.');
+          } else {
+            setAuthError(error.message);
+          }
+        } else if (data.user) {
+          if (data.user.email_confirmed_at) {
+            setSuccessMessage('Account created successfully! Redirecting...');
+            setTimeout(() => {
+              onLogin();
+            }, 1500);
+          } else {
+            setSuccessMessage('Account created! Please check your email for a confirmation link.');
+            setIsLogin(true);
+          }
+        }
+      }
+    } catch (error: any) {
+      setAuthError('An unexpected error occurred. Please try again.');
+      console.error('Auth error:', error);
+    }
+
     setIsLoading(false);
-    onLogin();
+  };
+
+  const handleSocialLogin = async (provider: 'google' | 'facebook') => {
+    setIsLoading(true);
+    setAuthError('');
+
+    try {
+      if (provider === 'google') {
+        const { error } = await authHelpers.signInWithGoogle();
+        if (error) {
+          setAuthError(`Google sign-in failed: ${error.message}`);
+        }
+      } else if (provider === 'facebook') {
+        const { error } = await authHelpers.signInWithFacebook();
+        if (error) {
+          setAuthError(`Facebook sign-in failed: ${error.message}`);
+        }
+      }
+    } catch (error: any) {
+      setAuthError(`${provider} sign-in failed. Please try again.`);
+      console.error(`${provider} auth error:`, error);
+    }
+
+    setIsLoading(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
+
+    // Clear specific field error when user starts typing
+    setErrors(prev => prev.filter(error => error.field !== name));
+    setAuthError('');
+  };
+
+  const getFieldError = (fieldName: string) => {
+    return errors.find(error => error.field === fieldName)?.message;
+  };
+
+  const hasFieldError = (fieldName: string) => {
+    return errors.some(error => error.field === fieldName);
   };
 
   return (
@@ -129,6 +234,21 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               </p>
             </div>
 
+            {/* Success/Error Messages */}
+            {successMessage && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center">
+                <CheckCircle className="h-5 w-5 text-green-600 mr-3" />
+                <span className="text-green-700 text-sm">{successMessage}</span>
+              </div>
+            )}
+
+            {authError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center">
+                <AlertCircle className="h-5 w-5 text-red-600 mr-3" />
+                <span className="text-red-700 text-sm">{authError}</span>
+              </div>
+            )}
+
             {/* Toggle Buttons */}
             <div className="flex bg-gray-100 rounded-lg p-1 mb-8">
               <button
@@ -157,21 +277,31 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {!isLogin && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Full Name</label>
+                  <label className="text-sm font-medium text-gray-700">Full Name *</label>
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm ${
+                      hasFieldError('name') 
+                        ? 'border-red-300 focus:border-red-500' 
+                        : 'border-gray-300 focus:border-blue-500'
+                    }`}
                     placeholder="Enter your full name"
                     required={!isLogin}
                   />
+                  {getFieldError('name') && (
+                    <p className="text-red-600 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {getFieldError('name')}
+                    </p>
+                  )}
                 </div>
               )}
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Email Address</label>
+                <label className="text-sm font-medium text-gray-700">Email Address *</label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
@@ -179,15 +309,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                    className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm ${
+                      hasFieldError('email') 
+                        ? 'border-red-300 focus:border-red-500' 
+                        : 'border-gray-300 focus:border-blue-500'
+                    }`}
                     placeholder="Enter your email"
                     required
                   />
                 </div>
+                {getFieldError('email') && (
+                  <p className="text-red-600 text-xs mt-1 flex items-center">
+                    <AlertCircle className="h-3 w-3 mr-1" />
+                    {getFieldError('email')}
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Password</label>
+                <label className="text-sm font-medium text-gray-700">Password *</label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <input
@@ -195,7 +335,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                    className={`w-full pl-10 pr-12 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm ${
+                      hasFieldError('password') 
+                        ? 'border-red-300 focus:border-red-500' 
+                        : 'border-gray-300 focus:border-blue-500'
+                    }`}
                     placeholder="Enter your password"
                     required
                   />
@@ -207,11 +351,22 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                   </button>
                 </div>
+                {getFieldError('password') && (
+                  <p className="text-red-600 text-xs mt-1 flex items-center">
+                    <AlertCircle className="h-3 w-3 mr-1" />
+                    {getFieldError('password')}
+                  </p>
+                )}
+                {!isLogin && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    Password must contain: 8+ characters, uppercase, lowercase, number, and special character
+                  </div>
+                )}
               </div>
 
               {!isLogin && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Confirm Password</label>
+                  <label className="text-sm font-medium text-gray-700">Confirm Password *</label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input
@@ -219,11 +374,21 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                       name="confirmPassword"
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm"
+                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 transition-all duration-200 bg-white/50 backdrop-blur-sm ${
+                        hasFieldError('confirmPassword') 
+                          ? 'border-red-300 focus:border-red-500' 
+                          : 'border-gray-300 focus:border-blue-500'
+                      }`}
                       placeholder="Confirm your password"
                       required={!isLogin}
                     />
                   </div>
+                  {getFieldError('confirmPassword') && (
+                    <p className="text-red-600 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {getFieldError('confirmPassword')}
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -269,8 +434,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <button
                   type="button"
-                  onClick={onLogin}
-                  className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-200 hover:scale-[1.02]"
+                  onClick={() => handleSocialLogin('google')}
+                  disabled={isLoading}
+                  className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-200 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -283,8 +449,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
                 <button
                   type="button"
-                  onClick={onLogin}
-                  className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-200 hover:scale-[1.02]"
+                  onClick={() => handleSocialLogin('facebook')}
+                  disabled={isLoading}
+                  className="w-full inline-flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 transition-all duration-200 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>

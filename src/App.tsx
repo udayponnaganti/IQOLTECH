@@ -1,18 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LoginPage } from './components/LoginPage';
 import { PreferenceForm } from './components/PreferenceForm';
 import { MatchResults } from './components/MatchResults';
 import { UserPreferences, NeighborhoodMatch } from './types';
 import { matcher } from './utils/matchingAlgorithm';
+import { authHelpers } from './lib/supabase';
 import { MapPin, Users, Home, TrendingUp } from 'lucide-react';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentView, setCurrentView] = useState<'landing' | 'preferences' | 'results'>('landing');
   const [matches, setMatches] = useState<NeighborhoodMatch[]>([]);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Check if user is already authenticated
+    const checkAuth = async () => {
+      try {
+        const { data } = await authHelpers.getCurrentUser();
+        if (data.user) {
+          setUser(data.user);
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('Auth check error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkAuth();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = authHelpers.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        setUser(session.user);
+        setIsAuthenticated(true);
+      } else if (event === 'SIGNED_OUT') {
+        setUser(null);
+        setIsAuthenticated(false);
+        setCurrentView('landing');
+        setMatches([]);
+      }
+    });
+
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, []);
 
   const handleLogin = () => {
     setIsAuthenticated(true);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await authHelpers.signOut();
+      setIsAuthenticated(false);
+      setCurrentView('landing');
+      setMatches([]);
+    } catch (error) {
+      console.error('Sign out error:', error);
+    }
   };
 
   const handleStartAssessment = () => {
@@ -29,6 +79,18 @@ function App() {
     setCurrentView('landing');
     setMatches([]);
   };
+
+  // Show loading spinner while checking authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Show login page if not authenticated
   if (!isAuthenticated) {
@@ -75,12 +137,19 @@ function App() {
                 <TrendingUp className="h-5 w-5 text-blue-600" />
                 <span className="text-sm text-gray-600">95% accuracy</span>
               </div>
-              <button
-                onClick={() => setIsAuthenticated(false)}
-                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                Sign Out
-              </button>
+              <div className="flex items-center space-x-4">
+                {user && (
+                  <span className="text-sm text-gray-600">
+                    Welcome, {user.user_metadata?.full_name || user.email}
+                  </span>
+                )}
+                <button
+                  onClick={handleSignOut}
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </div>

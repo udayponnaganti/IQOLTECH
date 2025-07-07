@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { LoginPage } from './components/LoginPage';
 import { PreferenceForm } from './components/PreferenceForm';
 import { MatchResults } from './components/MatchResults';
 import { UserPreferences, NeighborhoodMatch } from './types';
@@ -6,8 +7,13 @@ import { matcher } from './utils/matchingAlgorithm';
 import { MapPin, Users, Home, TrendingUp } from 'lucide-react';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentView, setCurrentView] = useState<'landing' | 'preferences' | 'results'>('landing');
   const [matches, setMatches] = useState<NeighborhoodMatch[]>([]);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
 
   const handleStartAssessment = () => {
     setCurrentView('preferences');
@@ -23,6 +29,11 @@ function App() {
     setCurrentView('landing');
     setMatches([]);
   };
+
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return <LoginPage onLogin={handleLogin} />;
+  }
 
   if (currentView === 'preferences') {
     return (
@@ -64,6 +75,12 @@ function App() {
                 <TrendingUp className="h-5 w-5 text-blue-600" />
                 <span className="text-sm text-gray-600">95% accuracy</span>
               </div>
+              <button
+                onClick={() => setIsAuthenticated(false)}
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>

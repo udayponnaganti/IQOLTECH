@@ -15,9 +15,19 @@ function App() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    // Check if user is already authenticated
+    // Handle OAuth callback and check authentication
     const checkAuth = async () => {
       try {
+        // Handle OAuth callback if present in URL
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        if (hashParams.get('access_token')) {
+          // OAuth callback detected, let Supabase handle the session
+          await authHelpers.handleOAuthCallback();
+          // Clean up the URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // Check current session
         const { data } = await authHelpers.getCurrentUser();
         if (data.user) {
           setUser(data.user);
@@ -37,6 +47,10 @@ function App() {
       if (event === 'SIGNED_IN' && session?.user) {
         setUser(session.user);
         setIsAuthenticated(true);
+        // Clean up URL if it contains OAuth tokens
+        if (window.location.hash.includes('access_token')) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
       } else if (event === 'SIGNED_OUT') {
         setUser(null);
         setIsAuthenticated(false);

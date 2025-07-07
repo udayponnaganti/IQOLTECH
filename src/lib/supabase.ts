@@ -11,6 +11,16 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Auth helper functions
 export const authHelpers = {
+  handleOAuthCallback: async () => {
+    // This will automatically handle the OAuth callback and set the session
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error('OAuth callback error:', error);
+      throw error;
+    }
+    return { data, error };
+  },
+
   signUp: async (email: string, password: string, name: string) => {
     const { data, error } = await supabase.auth.signUp({
       email,

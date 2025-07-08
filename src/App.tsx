@@ -141,11 +141,11 @@ function App() {
             <div className="hidden md:flex items-center space-x-8">
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-blue-600" />
-                <span className="text-sm text-gray-600">50,000+ users</span>
+                <span className="text-sm text-gray-600">2,50,000+ users</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Home className="h-5 w-5 text-blue-600" />
-                <span className="text-sm text-gray-600">500+ neighborhoods</span>
+                <span className="text-sm text-gray-600">100+ neighborhoods</span>
               </div>
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-5 w-5 text-blue-600" />
@@ -177,8 +177,8 @@ function App() {
             <span className="text-blue-600"> Neighborhood</span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Stop guessing where to live. Our advanced matching algorithm analyzes your lifestyle preferences, 
-            budget, and priorities to find neighborhoods that truly fit who you are.
+            Stop guessing where to live in India. Our advanced matching algorithm analyzes your lifestyle preferences, 
+            budget, and priorities to find Indian neighborhoods that truly fit who you are.
           </p>
           <button
             onClick={handleStartAssessment}
@@ -194,7 +194,7 @@ function App() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">How NeighborFit Works</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Our scientifically-backed approach uses 30+ data points to create your perfect neighborhood profile.
+            Our scientifically-backed approach uses 30+ data points to create your perfect Indian neighborhood profile.
           </p>
         </div>
 
@@ -205,7 +205,7 @@ function App() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Lifestyle Assessment</h3>
             <p className="text-gray-600">
-              Answer questions about your preferences for walkability, nightlife, dining, culture, and more.
+              Answer questions about your preferences for walkability, nightlife, dining, Indian culture, and more.
             </p>
           </div>
 
@@ -215,7 +215,7 @@ function App() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Smart Matching</h3>
             <p className="text-gray-600">
-              Our algorithm analyzes real neighborhood data including demographics, safety, amenities, and costs.
+              Our algorithm analyzes real Indian neighborhood data including demographics, safety, amenities, and costs.
             </p>
           </div>
 
@@ -225,7 +225,7 @@ function App() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Detailed Results</h3>
             <p className="text-gray-600">
-              Get personalized neighborhood recommendations with detailed breakdowns and match explanations.
+              Get personalized Indian neighborhood recommendations with detailed breakdowns and match explanations.
             </p>
           </div>
         </div>
@@ -283,12 +283,12 @@ function App() {
                   <div className="text-sm text-gray-600">Match Accuracy</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">500+</div>
+                  <div className="text-2xl font-bold text-blue-600">100+</div>
                   <div className="text-sm text-gray-600">Neighborhoods</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-blue-600">8</div>
-                  <div className="text-sm text-gray-600">Major Cities</div>
+                  <div className="text-sm text-gray-600">Major Indian Cities</div>
                 </div>
               </div>
             </div>
@@ -301,7 +301,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Find Your Perfect Neighborhood?</h2>
           <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of people who've found their ideal home with NeighborFit's personalized recommendations.
+            Join lakhs of people who've found their ideal home in India with NeighborFit's personalized recommendations.
           </p>
           <button
             onClick={handleStartAssessment}
@@ -322,7 +322,7 @@ function App() {
             <span className="text-xl font-bold">NeighborFit</span>
           </div>
           <p className="text-gray-400">
-            © 2024 NeighborFit. Helping you find your perfect neighborhood through data-driven matching.
+            © 2024 NeighborFit. Helping you find your perfect Indian neighborhood through data-driven matching.
           </p>
         </div>
       </footer>

@@ -53,7 +53,7 @@ export class NeighborhoodMatcher {
     factors++;
 
     // Income level (normalized)
-    const incomeScore = this.normalizeScore(demo.medianIncome, 30000, 200000);
+    const incomeScore = this.normalizeScore(demo.medianIncome, 300000, 2000000);
     score += incomeScore * (prefs.incomeImportance / 10);
     factors++;
 

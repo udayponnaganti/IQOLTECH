@@ -24,8 +24,8 @@ export const NeighborhoodCard: React.FC<NeighborhoodCardProps> = ({ match, onVie
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
+      style: 'currency', 
+      currency: 'INR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(price);
@@ -81,7 +81,7 @@ export const NeighborhoodCard: React.FC<NeighborhoodCardProps> = ({ match, onVie
             <DollarSign className="h-4 w-4 text-gray-400 mr-2" />
             <div>
               <p className="text-xs text-gray-500">Median Rent</p>
-              <p className="text-sm font-semibold">{formatPrice(neighborhood.housing.medianRent)}</p>
+              <p className="text-sm font-semibold">{formatPrice(neighborhood.housing.medianRent)}/month</p>
             </div>
           </div>
           <div className="flex items-center">

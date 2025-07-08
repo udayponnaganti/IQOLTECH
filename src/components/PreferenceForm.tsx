@@ -267,12 +267,12 @@ export const PreferenceForm: React.FC<PreferenceFormProps> = ({ onPreferencesSub
             </div>
             
             <SliderInput
-              label={`Maximum ${preferences.housing.housingType === 'rent' ? 'Monthly Rent' : 'Home Price'}`}
+              label={`Maximum ${preferences.housing.housingType === 'rent' ? 'Monthly Rent (₹)' : 'Home Price (₹)'}`}
               value={preferences.housing.maxBudget}
               onChange={(value: number) => handleSliderChange('housing', 'maxBudget', value)}
-              min={preferences.housing.housingType === 'rent' ? 1000 : 200000}
-              max={preferences.housing.housingType === 'rent' ? 8000 : 2000000}
-              step={preferences.housing.housingType === 'rent' ? 100 : 25000}
+              min={preferences.housing.housingType === 'rent' ? 15000 : 3000000}
+              max={preferences.housing.housingType === 'rent' ? 150000 : 50000000}
+              step={preferences.housing.housingType === 'rent' ? 5000 : 500000}
             />
             
             <SliderInput

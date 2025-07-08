@@ -2,443 +2,443 @@ import { NeighborhoodData } from '../types';
 
 export const neighborhoods: NeighborhoodData[] = [
   {
-    id: 'brooklyn-williamsburg',
-    name: 'Williamsburg',
-    city: 'Brooklyn',
-    state: 'NY',
-    description: 'Trendy neighborhood with artisanal everything, waterfront views, and vibrant nightlife.',
+    id: 'mumbai-bandra',
+    name: 'Bandra West',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    description: 'Trendy neighborhood with upscale dining, Bollywood celebrity homes, and vibrant nightlife scene.',
     image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
     demographics: {
-      population: 151308,
-      medianAge: 33,
-      medianIncome: 85000,
+      population: 180000,
+      medianAge: 32,
+      medianIncome: 1200000,
       educationLevel: 'Graduate Degree',
-      diversityIndex: 0.72
+      diversityIndex: 0.78
     },
     lifestyle: {
-      walkabilityScore: 89,
-      transitScore: 78,
-      bikeScore: 85,
+      walkabilityScore: 85,
+      transitScore: 82,
+      bikeScore: 65,
       nightlifeScore: 92,
-      diningScore: 88,
-      shoppingScore: 82,
+      diningScore: 95,
+      shoppingScore: 88,
+      parksScore: 72,
+      culturalScore: 89
+    },
+    amenities: {
+      restaurants: 425,
+      bars: 78,
+      cafes: 156,
+      parks: 8,
+      gyms: 35,
+      schools: 22,
+      hospitals: 5,
+      libraries: 3
+    },
+    housing: {
+      medianHomePrice: 25000000,
+      medianRent: 85000,
+      propertyTax: 0.8,
+      homeownershipRate: 0.42
+    },
+    safety: {
+      crimeRate: 12.5,
+      safetyScore: 82
+    },
+    climate: {
+      averageTemp: 28,
+      rainyDays: 120,
+      sunnyDays: 200
+    },
+    commute: {
+      averageCommuteTime: 45,
+      publicTransitAccess: 85,
+      walkingCommute: 15
+    }
+  },
+  {
+    id: 'bangalore-koramangala',
+    name: 'Koramangala',
+    city: 'Bangalore',
+    state: 'Karnataka',
+    description: 'Tech hub with startup culture, modern cafes, and young professional community.',
+    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
+    demographics: {
+      population: 125000,
+      medianAge: 29,
+      medianIncome: 950000,
+      educationLevel: 'Graduate Degree',
+      diversityIndex: 0.85
+    },
+    lifestyle: {
+      walkabilityScore: 78,
+      transitScore: 72,
+      bikeScore: 82,
+      nightlifeScore: 88,
+      diningScore: 92,
+      shoppingScore: 85,
+      parksScore: 68,
+      culturalScore: 84
+    },
+    amenities: {
+      restaurants: 380,
+      bars: 65,
+      cafes: 145,
+      parks: 12,
+      gyms: 28,
+      schools: 18,
+      hospitals: 4,
+      libraries: 5
+    },
+    housing: {
+      medianHomePrice: 12000000,
+      medianRent: 45000,
+      propertyTax: 0.6,
+      homeownershipRate: 0.38
+    },
+    safety: {
+      crimeRate: 8.2,
+      safetyScore: 88
+    },
+    climate: {
+      averageTemp: 24,
+      rainyDays: 85,
+      sunnyDays: 250
+    },
+    commute: {
+      averageCommuteTime: 35,
+      publicTransitAccess: 75,
+      walkingCommute: 12
+    }
+  },
+  {
+    id: 'delhi-cp',
+    name: 'Connaught Place',
+    city: 'New Delhi',
+    state: 'Delhi',
+    description: 'Historic commercial center with colonial architecture, shopping, and cultural landmarks.',
+    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
+    demographics: {
+      population: 95000,
+      medianAge: 35,
+      medianIncome: 1100000,
+      educationLevel: 'Graduate Degree',
+      diversityIndex: 0.82
+    },
+    lifestyle: {
+      walkabilityScore: 92,
+      transitScore: 88,
+      bikeScore: 58,
+      nightlifeScore: 85,
+      diningScore: 89,
+      shoppingScore: 95,
       parksScore: 75,
       culturalScore: 94
     },
     amenities: {
-      restaurants: 342,
-      bars: 89,
-      cafes: 156,
-      parks: 12,
-      gyms: 28,
+      restaurants: 320,
+      bars: 45,
+      cafes: 89,
+      parks: 6,
+      gyms: 22,
       schools: 15,
       hospitals: 3,
       libraries: 4
     },
     housing: {
-      medianHomePrice: 1200000,
-      medianRent: 3500,
-      propertyTax: 1.25,
+      medianHomePrice: 18000000,
+      medianRent: 65000,
+      propertyTax: 0.7,
       homeownershipRate: 0.35
     },
     safety: {
-      crimeRate: 15.2,
-      safetyScore: 78
+      crimeRate: 18.5,
+      safetyScore: 75
     },
     climate: {
-      averageTemp: 55,
-      rainyDays: 115,
-      sunnyDays: 224
+      averageTemp: 25,
+      rainyDays: 65,
+      sunnyDays: 280
     },
     commute: {
-      averageCommuteTime: 35,
-      publicTransitAccess: 85,
-      walkingCommute: 12
+      averageCommuteTime: 42,
+      publicTransitAccess: 92,
+      walkingCommute: 25
     }
   },
   {
-    id: 'sf-mission',
-    name: 'Mission District',
-    city: 'San Francisco',
-    state: 'CA',
-    description: 'Vibrant Latino culture, incredible food scene, and colorful murals throughout the neighborhood.',
+    id: 'pune-koregaon-park',
+    name: 'Koregaon Park',
+    city: 'Pune',
+    state: 'Maharashtra',
+    description: 'Upscale area with German Bakery culture, expat community, and serene ashram atmosphere.',
     image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
     demographics: {
-      population: 59000,
-      medianAge: 36,
-      medianIncome: 110000,
-      educationLevel: 'Bachelor\'s Degree',
-      diversityIndex: 0.84
+      population: 45000,
+      medianAge: 31,
+      medianIncome: 850000,
+      educationLevel: 'Graduate Degree',
+      diversityIndex: 0.75
     },
     lifestyle: {
-      walkabilityScore: 93,
-      transitScore: 82,
-      bikeScore: 88,
-      nightlifeScore: 87,
-      diningScore: 95,
-      shoppingScore: 76,
-      parksScore: 68,
-      culturalScore: 91
+      walkabilityScore: 82,
+      transitScore: 68,
+      bikeScore: 85,
+      nightlifeScore: 78,
+      diningScore: 88,
+      shoppingScore: 82,
+      parksScore: 88,
+      culturalScore: 92
     },
     amenities: {
-      restaurants: 298,
-      bars: 67,
-      cafes: 89,
-      parks: 8,
-      gyms: 22,
-      schools: 18,
-      hospitals: 2,
-      libraries: 3
+      restaurants: 185,
+      bars: 35,
+      cafes: 95,
+      parks: 15,
+      gyms: 18,
+      schools: 12,
+      hospitals: 3,
+      libraries: 2
     },
     housing: {
-      medianHomePrice: 1800000,
-      medianRent: 4200,
-      propertyTax: 0.75,
-      homeownershipRate: 0.28
+      medianHomePrice: 8500000,
+      medianRent: 32000,
+      propertyTax: 0.5,
+      homeownershipRate: 0.48
     },
     safety: {
-      crimeRate: 28.4,
-      safetyScore: 65
+      crimeRate: 6.8,
+      safetyScore: 92
     },
     climate: {
-      averageTemp: 57,
-      rainyDays: 67,
-      sunnyDays: 259
+      averageTemp: 26,
+      rainyDays: 95,
+      sunnyDays: 240
     },
     commute: {
-      averageCommuteTime: 32,
-      publicTransitAccess: 88,
+      averageCommuteTime: 28,
+      publicTransitAccess: 72,
       walkingCommute: 18
     }
   },
   {
-    id: 'austin-south-by-southwest',
-    name: 'South by Southwest',
-    city: 'Austin',
-    state: 'TX',
-    description: 'Music capital with live venues, food trucks, and a thriving tech scene.',
+    id: 'hyderabad-hitech-city',
+    name: 'HITEC City',
+    city: 'Hyderabad',
+    state: 'Telangana',
+    description: 'IT corridor with modern infrastructure, tech companies, and contemporary lifestyle.',
     image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
     demographics: {
-      population: 35000,
-      medianAge: 31,
-      medianIncome: 75000,
-      educationLevel: 'Bachelor\'s Degree',
-      diversityIndex: 0.68
+      population: 85000,
+      medianAge: 28,
+      medianIncome: 920000,
+      educationLevel: 'Graduate Degree',
+      diversityIndex: 0.88
     },
     lifestyle: {
-      walkabilityScore: 76,
-      transitScore: 45,
-      bikeScore: 82,
-      nightlifeScore: 96,
-      diningScore: 89,
-      shoppingScore: 72,
-      parksScore: 85,
-      culturalScore: 98
+      walkabilityScore: 75,
+      transitScore: 78,
+      bikeScore: 72,
+      nightlifeScore: 82,
+      diningScore: 85,
+      shoppingScore: 88,
+      parksScore: 82,
+      culturalScore: 78
     },
     amenities: {
-      restaurants: 187,
-      bars: 94,
-      cafes: 67,
-      parks: 22,
-      gyms: 18,
-      schools: 12,
-      hospitals: 2,
-      libraries: 2
+      restaurants: 245,
+      bars: 42,
+      cafes: 78,
+      parks: 18,
+      gyms: 25,
+      schools: 16,
+      hospitals: 4,
+      libraries: 3
     },
     housing: {
-      medianHomePrice: 650000,
-      medianRent: 2100,
-      propertyTax: 2.1,
-      homeownershipRate: 0.42
+      medianHomePrice: 9500000,
+      medianRent: 38000,
+      propertyTax: 0.4,
+      homeownershipRate: 0.52
     },
     safety: {
-      crimeRate: 22.1,
-      safetyScore: 72
+      crimeRate: 7.5,
+      safetyScore: 89
     },
     climate: {
-      averageTemp: 68,
-      rainyDays: 89,
-      sunnyDays: 300
+      averageTemp: 27,
+      rainyDays: 75,
+      sunnyDays: 270
     },
     commute: {
-      averageCommuteTime: 24,
-      publicTransitAccess: 52,
+      averageCommuteTime: 32,
+      publicTransitAccess: 82,
       walkingCommute: 8
     }
   },
   {
-    id: 'seattle-capitol-hill',
-    name: 'Capitol Hill',
-    city: 'Seattle',
-    state: 'WA',
-    description: 'Bohemian neighborhood with indie music venues, vintage shops, and coffee culture.',
+    id: 'chennai-adyar',
+    name: 'Adyar',
+    city: 'Chennai',
+    state: 'Tamil Nadu',
+    description: 'Cultural hub with Theosophical Society, beach access, and traditional South Indian charm.',
     image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
     demographics: {
-      population: 27000,
-      medianAge: 32,
-      medianIncome: 89000,
-      educationLevel: 'Graduate Degree',
-      diversityIndex: 0.71
-    },
-    lifestyle: {
-      walkabilityScore: 91,
-      transitScore: 72,
-      bikeScore: 79,
-      nightlifeScore: 85,
-      diningScore: 84,
-      shoppingScore: 78,
-      parksScore: 82,
-      culturalScore: 89
-    },
-    amenities: {
-      restaurants: 165,
-      bars: 52,
-      cafes: 78,
-      parks: 15,
-      gyms: 19,
-      schools: 8,
-      hospitals: 1,
-      libraries: 2
-    },
-    housing: {
-      medianHomePrice: 950000,
-      medianRent: 2800,
-      propertyTax: 1.02,
-      homeownershipRate: 0.38
-    },
-    safety: {
-      crimeRate: 45.2,
-      safetyScore: 68
-    },
-    climate: {
-      averageTemp: 51,
-      rainyDays: 155,
-      sunnyDays: 152
-    },
-    commute: {
-      averageCommuteTime: 28,
-      publicTransitAccess: 78,
-      walkingCommute: 15
-    }
-  },
-  {
-    id: 'portland-pearl-district',
-    name: 'Pearl District',
-    city: 'Portland',
-    state: 'OR',
-    description: 'Converted warehouse district with galleries, upscale dining, and urban living.',
-    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
-    demographics: {
-      population: 12000,
-      medianAge: 38,
-      medianIncome: 95000,
-      educationLevel: 'Graduate Degree',
-      diversityIndex: 0.58
+      population: 165000,
+      medianAge: 33,
+      medianIncome: 780000,
+      educationLevel: 'Bachelor\'s Degree',
+      diversityIndex: 0.68
     },
     lifestyle: {
       walkabilityScore: 88,
-      transitScore: 85,
-      bikeScore: 92,
-      nightlifeScore: 76,
-      diningScore: 87,
+      transitScore: 82,
+      bikeScore: 78,
+      nightlifeScore: 72,
+      diningScore: 92,
       shoppingScore: 85,
-      parksScore: 79,
-      culturalScore: 82
+      parksScore: 85,
+      culturalScore: 95
     },
     amenities: {
-      restaurants: 89,
-      bars: 24,
-      cafes: 34,
-      parks: 8,
-      gyms: 12,
-      schools: 6,
-      hospitals: 1,
-      libraries: 1
+      restaurants: 285,
+      bars: 28,
+      cafes: 65,
+      parks: 22,
+      gyms: 20,
+      schools: 25,
+      hospitals: 6,
+      libraries: 8
     },
     housing: {
-      medianHomePrice: 750000,
-      medianRent: 2400,
-      propertyTax: 1.15,
-      homeownershipRate: 0.48
+      medianHomePrice: 7800000,
+      medianRent: 28000,
+      propertyTax: 0.6,
+      homeownershipRate: 0.58
     },
     safety: {
-      crimeRate: 18.7,
-      safetyScore: 82
+      crimeRate: 9.2,
+      safetyScore: 86
     },
     climate: {
-      averageTemp: 53,
-      rainyDays: 164,
-      sunnyDays: 144
+      averageTemp: 29,
+      rainyDays: 55,
+      sunnyDays: 285
     },
     commute: {
-      averageCommuteTime: 22,
-      publicTransitAccess: 89,
+      averageCommuteTime: 38,
+      publicTransitAccess: 85,
       walkingCommute: 22
     }
   },
   {
-    id: 'denver-highlands',
-    name: 'Highlands',
-    city: 'Denver',
-    state: 'CO',
-    description: 'Historic neighborhood with mountain views, craft breweries, and outdoor access.',
+    id: 'kolkata-salt-lake',
+    name: 'Salt Lake City',
+    city: 'Kolkata',
+    state: 'West Bengal',
+    description: 'Planned township with IT sector, modern amenities, and intellectual community.',
     image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
     demographics: {
-      population: 18000,
+      population: 220000,
       medianAge: 34,
-      medianIncome: 78000,
-      educationLevel: 'Bachelor\'s Degree',
-      diversityIndex: 0.62
-    },
-    lifestyle: {
-      walkabilityScore: 72,
-      transitScore: 58,
-      bikeScore: 85,
-      nightlifeScore: 78,
-      diningScore: 81,
-      shoppingScore: 68,
-      parksScore: 94,
-      culturalScore: 74
-    },
-    amenities: {
-      restaurants: 78,
-      bars: 35,
-      cafes: 28,
-      parks: 18,
-      gyms: 14,
-      schools: 9,
-      hospitals: 1,
-      libraries: 1
-    },
-    housing: {
-      medianHomePrice: 580000,
-      medianRent: 1900,
-      propertyTax: 0.51,
-      homeownershipRate: 0.58
-    },
-    safety: {
-      crimeRate: 12.8,
-      safetyScore: 85
-    },
-    climate: {
-      averageTemp: 50,
-      rainyDays: 73,
-      sunnyDays: 300
-    },
-    commute: {
-      averageCommuteTime: 26,
-      publicTransitAccess: 65,
-      walkingCommute: 6
-    }
-  },
-  {
-    id: 'chicago-wicker-park',
-    name: 'Wicker Park',
-    city: 'Chicago',
-    state: 'IL',
-    description: 'Hipster enclave with vintage shops, independent music venues, and diverse dining.',
-    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
-    demographics: {
-      population: 28000,
-      medianAge: 32,
-      medianIncome: 72000,
-      educationLevel: 'Bachelor\'s Degree',
-      diversityIndex: 0.74
-    },
-    lifestyle: {
-      walkabilityScore: 86,
-      transitScore: 82,
-      bikeScore: 81,
-      nightlifeScore: 88,
-      diningScore: 85,
-      shoppingScore: 89,
-      parksScore: 71,
-      culturalScore: 91
-    },
-    amenities: {
-      restaurants: 145,
-      bars: 48,
-      cafes: 52,
-      parks: 9,
-      gyms: 16,
-      schools: 11,
-      hospitals: 1,
-      libraries: 2
-    },
-    housing: {
-      medianHomePrice: 485000,
-      medianRent: 1850,
-      propertyTax: 2.3,
-      homeownershipRate: 0.44
-    },
-    safety: {
-      crimeRate: 32.1,
-      safetyScore: 71
-    },
-    climate: {
-      averageTemp: 49,
-      rainyDays: 125,
-      sunnyDays: 189
-    },
-    commute: {
-      averageCommuteTime: 31,
-      publicTransitAccess: 88,
-      walkingCommute: 11
-    }
-  },
-  {
-    id: 'boston-north-end',
-    name: 'North End',
-    city: 'Boston',
-    state: 'MA',
-    description: 'Historic Italian neighborhood with cobblestone streets, authentic restaurants, and waterfront views.',
-    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
-    demographics: {
-      population: 7500,
-      medianAge: 41,
-      medianIncome: 105000,
+      medianIncome: 720000,
       educationLevel: 'Graduate Degree',
-      diversityIndex: 0.45
+      diversityIndex: 0.72
     },
     lifestyle: {
-      walkabilityScore: 95,
-      transitScore: 88,
-      bikeScore: 65,
-      nightlifeScore: 74,
-      diningScore: 96,
-      shoppingScore: 78,
-      parksScore: 86,
+      walkabilityScore: 85,
+      transitScore: 78,
+      bikeScore: 82,
+      nightlifeScore: 75,
+      diningScore: 88,
+      shoppingScore: 82,
+      parksScore: 92,
       culturalScore: 89
     },
     amenities: {
-      restaurants: 67,
-      bars: 18,
-      cafes: 21,
-      parks: 6,
-      gyms: 8,
-      schools: 4,
-      hospitals: 1,
-      libraries: 1
+      restaurants: 195,
+      bars: 32,
+      cafes: 58,
+      parks: 28,
+      gyms: 18,
+      schools: 20,
+      hospitals: 4,
+      libraries: 6
     },
     housing: {
-      medianHomePrice: 895000,
-      medianRent: 3200,
-      propertyTax: 1.04,
+      medianHomePrice: 6200000,
+      medianRent: 22000,
+      propertyTax: 0.8,
       homeownershipRate: 0.62
     },
     safety: {
-      crimeRate: 8.2,
-      safetyScore: 91
+      crimeRate: 11.8,
+      safetyScore: 84
     },
     climate: {
-      averageTemp: 51,
-      rainyDays: 127,
-      sunnyDays: 201
+      averageTemp: 27,
+      rainyDays: 125,
+      sunnyDays: 210
     },
     commute: {
-      averageCommuteTime: 29,
-      publicTransitAccess: 92,
-      walkingCommute: 28
+      averageCommuteTime: 35,
+      publicTransitAccess: 82,
+      walkingCommute: 15
+    }
+  },
+  {
+    id: 'gurgaon-cyber-city',
+    name: 'Cyber City',
+    city: 'Gurgaon',
+    state: 'Haryana',
+    description: 'Modern business district with multinational companies, luxury malls, and urban lifestyle.',
+    image: 'https://images.pexels.com/photos/2404949/pexels-photo-2404949.jpeg?auto=compress&cs=tinysrgb&w=800',
+    demographics: {
+      population: 75000,
+      medianAge: 30,
+      medianIncome: 1350000,
+      educationLevel: 'Graduate Degree',
+      diversityIndex: 0.89
+    },
+    lifestyle: {
+      walkabilityScore: 72,
+      transitScore: 68,
+      bikeScore: 58,
+      nightlifeScore: 88,
+      diningScore: 90,
+      shoppingScore: 95,
+      parksScore: 65,
+      culturalScore: 75
+    },
+    amenities: {
+      restaurants: 165,
+      bars: 48,
+      cafes: 72,
+      parks: 8,
+      gyms: 32,
+      schools: 14,
+      hospitals: 3,
+      libraries: 2
+    },
+    housing: {
+      medianHomePrice: 15000000,
+      medianRent: 55000,
+      propertyTax: 0.3,
+      homeownershipRate: 0.35
+    },
+    safety: {
+      crimeRate: 14.2,
+      safetyScore: 78
+    },
+    climate: {
+      averageTemp: 26,
+      rainyDays: 45,
+      sunnyDays: 295
+    },
+    commute: {
+      averageCommuteTime: 48,
+      publicTransitAccess: 72,
+      walkingCommute: 5
     }
   }
 ];

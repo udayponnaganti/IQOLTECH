@@ -184,8 +184,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   <Users className="h-6 w-6 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">50,000+ Happy Users</h3>
-                  <p className="text-sm text-gray-600">Trusted by thousands nationwide</p>
+                  <h3 className="font-semibold text-gray-900">2,50,000+ Happy Users</h3>
+                  <p className="text-sm text-gray-600">Trusted by lakhs across India</p>
                 </div>
               </div>
               
@@ -194,8 +194,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   <Home className="h-6 w-6 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">500+ Neighborhoods</h3>
-                  <p className="text-sm text-gray-600">Comprehensive coverage across major cities</p>
+                  <h3 className="font-semibold text-gray-900">100+ Neighborhoods</h3>
+                  <p className="text-sm text-gray-600">Comprehensive coverage across major Indian cities</p>
                 </div>
               </div>
               
@@ -234,7 +234,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
               <p className="text-gray-600">
                 {isLogin 
                   ? 'Sign in to continue your neighborhood search' 
-                  : 'Join thousands finding their perfect neighborhood'
+                 : 'Join lakhs finding their perfect Indian neighborhood'
                 }
               </p>
             </div>
